@@ -1,0 +1,57 @@
+{
+  "name": "Quartz Plugin",
+  "id": "quartz",
+  "version": "0.5-SNAPHSOT",
+  "transactionTypes": [
+    "Background"
+  ],
+  "capturePoints": [
+    {
+      "className": "org.quartz.core.JobRunShell",
+      "methodName": "run",
+      "methodParameterTypes": [ ],
+      "captureKind": "transaction",
+      "metricName": "quartz job",
+      "traceEntryTemplate": "quartz job run shell: {{this.jec.jobDetail.name}}",
+      "transactionType": "Background",
+      "transactionNameTemplate": "Quartz job: {{this.jec.jobDetail.name}}"
+    },
+    {
+      "className": "org.quartz.Job",
+      "methodName": "execute",
+      "methodParameterTypes": [
+        "org.quartz.JobExecutionContext"
+      ],
+      "captureKind": "transaction",
+      "metricName": "quartz job",
+      "traceEntryTemplate": "quartz job: {{0.jobDetail.name}}",
+      "transactionType": "Background",
+      "transactionNameTemplate": "Quartz job: {{0.jobDetail.name}}"
+    },
+    {
+      "className": "org.quartz.impl.jdbcjobstore.JobStoreSupport$MisfireHandler",
+      "methodName": "manage",
+      "methodParameterTypes": [ ],
+      "captureKind": "transaction",
+      "metricName": "quartz handle misfire",
+      "traceEntryTemplate": "quartz handle misfire",
+      "traceEntryCaptureSelfNested": true,
+      "transactionType": "Background",
+      "transactionNameTemplate": "quartz handle misfire"
+    },
+    {
+      "className" : "org.quartz.impl.jdbcjobstore.JobStoreSupport",
+      "methodName" : "acquireNextTrigger|releaseAcquiredTrigger|triggerFired|triggeredJobComplete",
+      "methodParameterTypes" : [
+        "org.quartz.core.SchedulingContext",
+        ".."
+      ],
+      "captureKind": "transaction",
+      "metricName" : "quartz job store support",
+      "traceEntryTemplate" : "quartz job store support: {{methodName}}",
+      "traceEntryCaptureSelfNested": true,
+      "transactionType": "Background",
+      "transactionNameTemplate" : "quartz job store support"
+    }
+  ]
+}

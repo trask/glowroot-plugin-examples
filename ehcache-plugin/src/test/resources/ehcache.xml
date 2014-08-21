@@ -1,0 +1,6 @@
+<!DOCTYPE ehcache>
+<ehcache name="testmanager">
+
+  <cache name="testcache" maxEntriesLocalHeap="100" />
+
+</ehcache>

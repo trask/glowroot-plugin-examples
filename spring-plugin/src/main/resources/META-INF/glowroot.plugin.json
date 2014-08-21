@@ -1,0 +1,30 @@
+{
+  "name": "Spring Plugin",
+  "id": "spring",
+  "version": "0.1-SNAPHSOT",
+  "capturePoints": [
+    {
+      "className": "org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory",
+      "methodName": "autowireBean",
+      "methodParameterTypes": [
+        "java.lang.Object"
+      ],
+      "captureKind": "metric",
+      "metricName": "spring autowire"
+    },
+    {
+      "className": "org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor",
+      "methodName": "afterCompletion",
+      "methodParameterTypes": [
+        "org.springframework.web.context.request.WebRequest",
+        "java.lang.Exception"
+      ],
+      "captureKind": "trace-entry",
+      "metricName": "hibernate osiv",
+      "traceEntryTemplate": "hibernate osiv: OpenSessionInViewInterceptor.afterCompletion()"
+    }
+  ],
+  "aspects": [
+    "org.glowroot.spring.SpringAspect"
+  ]
+}

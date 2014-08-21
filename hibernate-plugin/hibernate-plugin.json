@@ -1,0 +1,43 @@
+{
+  "name": "Hibernate Plugin",
+  "id": "hibernate",
+  "version": "0.5-SNAPHSOT",
+  "capturePoints": [
+    {
+      "className": "org.hibernate.Session",
+      "methodName": "flush",
+      "methodParameterTypes": [ ],
+      "captureKind": "trace-entry",
+      "metricName": "hibernate flush",
+      "traceEntryTemplate": "hibernate flush",
+      "traceEntryStackThresholdMillis": 100,
+      "traceEntryCaptureSelfNested": true
+    },
+    {
+      "className": "org.hibernate.Transaction",
+      "methodName": "commit",
+      "methodParameterTypes": [ ],
+      "captureKind": "trace-entry",
+      "metricName": "hibernate commit",
+      "traceEntryTemplate": "hibernate commit"
+    },
+    {
+      "className": "org.hibernate.Transaction",
+      "methodName": "rollback",
+      "methodParameterTypes": [ ],
+      "captureKind": "trace-entry",
+      "metricName": "hibernate rollback",
+      "traceEntryTemplate": "hibernate rollback"
+    },
+    {
+      "className": "org.hibernate.envers.synchronization.AuditProcess",
+      "methodName": "doBeforeTransactionCompletion",
+      "methodParameterTypes": [
+        "org.hibernate.engine.SessionImplementor"
+      ],
+      "captureKind": "trace-entry",
+      "metricName": "hibernate envers",
+      "traceEntryTemplate": "hibernate envers: AuditProcess.doBeforeTransactionCompletion()"
+    }
+  ]
+}

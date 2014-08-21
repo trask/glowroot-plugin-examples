@@ -1,0 +1,26 @@
+{
+  "name": "Groovy Plugin",
+  "id": "groovy",
+  "version": "0.1-SNAPHSOT",
+  "capturePoints": [
+    {
+      "className": "groovy.lang.GroovyClassLoader",
+      "methodName": "parseClass",
+      "methodParameterTypes": [
+        "groovy.lang.GroovyCodeSource",
+        "boolean"
+      ],
+      "captureKind": "trace-entry",
+      "metricName": "groovy parse",
+      "traceEntryTemplate": "groovy parse: {{0.name}}, shouldCacheSource={{1}}"
+    },
+    {
+      "className": "groovy.lang.Script",
+      "methodName": "run",
+      "methodParameterTypes": [ ],
+      "captureKind": "trace-entry",
+      "metricName": "groovy run",
+      "traceEntryTemplate": "groovy run: {{this.class.name}}"
+    }
+  ]
+}

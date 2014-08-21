@@ -1,0 +1,34 @@
+{
+  "name": "Milton Plugin",
+  "id": "milton",
+  "version": "0.1-SNAPHSOT",
+  "transactionTypes": [
+    "Webdav"
+  ],
+  "capturePoints": [
+    {
+      "className": "io.milton.servlet.MiltonFilter",
+      "methodName": "doMiltonProcessing",
+      "methodParameterTypes": [
+        "javax.servlet.http.HttpServletRequest",
+        "javax.servlet.http.HttpServletResponse"
+      ],
+      "captureKind": "other",
+      "transactionType": "Webdav",
+      "transactionNameTemplate": "Webdav {{0.method}}"
+    },
+    {
+      "className": "io.milton.http.Request",
+      "methodName": "setAuthorization",
+      "methodParameterTypes": [
+        "io.milton.http.Auth"
+      ],
+      "captureKind": "other",
+      "transactionType": "Webdav",
+      "transactionUserTemplate": "{{0.user}}"
+    }
+  ],
+  "aspects": [
+    "org.glowroot.milton.MiltonAspect"
+  ]
+}

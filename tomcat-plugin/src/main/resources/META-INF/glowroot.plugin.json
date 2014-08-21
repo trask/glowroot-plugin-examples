@@ -1,0 +1,95 @@
+{
+  "name": "Tomcat Plugin",
+  "id": "tomcat",
+  "version": "0.1-SNAPHSOT",
+  "transactionTypes": [
+    "Startup"
+  ],
+  "properties": [
+    {
+      "name": "captureStartup",
+      "type": "boolean",
+      "label": "Startup",
+      "checkboxLabel": "Capture tomcat startup"
+    }
+  ],
+  "capturePoints": [
+    {
+      "className": "org.apache.catalina.startup.HostConfig$DeployWar",
+      "methodName": "run",
+      "methodParameterTypes": [ ],
+      "captureKind": "transaction",
+      "metricName": "tomcat startup",
+      "traceEntryTemplate": "tomcat startup: deploy war",
+      "transactionType": "Startup",
+      "transactionNameTemplate": "tomcat startup",
+      "enabledProperty": "captureStartup"
+    },
+    {
+      "className": "org.apache.catalina.startup.HostConfig$DeployDirectory",
+      "methodName": "run",
+      "methodParameterTypes": [ ],
+      "captureKind": "transaction",
+      "metricName": "tomcat startup",
+      "traceEntryTemplate": "tomcat startup: deploy directory",
+      "transactionType": "Startup",
+      "transactionNameTemplate": "tomcat startup",
+      "enabledProperty": "captureStartup"
+    },
+    {
+      "className": "org.apache.catalina.startup.HostConfig$DeployDescriptor",
+      "methodName": "run",
+      "methodParameterTypes": [ ],
+      "captureKind": "transaction",
+      "metricName": "tomcat startup",
+      "traceEntryTemplate": "tomcat startup: deploy descriptor",
+      "transactionType": "Startup",
+      "transactionNameTemplate": "tomcat startup",
+      "enabledProperty": "captureStartup"
+    },
+    {
+      "className": "org.apache.jasper.JspCompilationContext",
+      "methodName": "compile",
+      "methodParameterTypes": [ ],
+      "captureKind": "trace-entry",
+      "metricName": "tomcat compile",
+      "traceEntryTemplate": "tomcat compile: {{this.jspFile}}"
+    },
+    {
+      "className": "org.apache.coyote.Request",
+      "methodName": "doRead",
+      "methodParameterTypes": [
+        ".."
+      ],
+      "captureKind": "metric",
+      "metricName": "tomcat read request chunk"
+    },
+    {
+      "className": "org.apache.coyote.Response",
+      "methodName": "doWrite",
+      "methodParameterTypes": [
+        ".."
+      ],
+      "captureKind": "metric",
+      "metricName": "tomcat write response chunk"
+    },
+    {
+      "className": "org.apache.catalina.loader.WebappClassLoader",
+      "methodName": "loadClass",
+      "methodParameterTypes": [
+        ".."
+      ],
+      "captureKind": "metric",
+      "metricName": "tomcat load class"
+    },
+    {
+      "className": "org.apache.catalina.loader.WebappClassLoader",
+      "methodName": "getResource*",
+      "methodParameterTypes": [
+        ".."
+      ],
+      "captureKind": "metric",
+      "metricName": "tomcat get resource"
+    }
+  ]
+}
